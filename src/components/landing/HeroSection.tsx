@@ -10,7 +10,7 @@ export function HeroSection() {
   const { setFloatingChatOpen } = useUIStore();
 
   return (
-    <section className="relative min-h-[92vh] flex items-center justify-center overflow-hidden py-24 bg-[#0A1128]">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-16 md:py-20 bg-[#0A1128]">
       {/* Background Image Placeholder with Dark Luxury Overlay */}
       <div className="absolute inset-0 z-0">
         <Image

@@ -87,6 +87,6 @@ export const AMENITIES = [
 export const NAV_LINKS = [
   { href: '/', label: 'Home' },
   { href: '/properties', label: 'Properties' },
-  { href: '/chat', label: 'AI Chat' },
+  // { href: '/chat', label: 'AI Chat' },
   { href: '/appointments', label: 'Appointments' },
 ];
