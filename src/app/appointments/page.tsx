@@ -33,7 +33,7 @@ export default function AppointmentsPage() {
           <EmptyState
             title="No appointments yet"
             description="Book a visit from property details or chat with the AI assistant to arrange a viewing."
-            action={{ label: 'Start chat', href: '/chat' }}
+            action={{ label: 'Start chat', href: '/' }}
           />
         ) : (
           <div className="grid gap-6 xl:grid-cols-2">
