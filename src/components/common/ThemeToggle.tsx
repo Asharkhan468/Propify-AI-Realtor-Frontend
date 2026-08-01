@@ -20,6 +20,7 @@ export function ThemeToggle() {
         initial={false}
         animate={{ rotate: theme === 'dark' ? 0 : 180, opacity: 1 }}
         transition={{ duration: 0.3, type: 'spring', stiffness: 200 }}
+        suppressHydrationWarning
       >
         {theme === 'dark' ? (
           <Sun className="w-4 h-4 text-amber-400" />

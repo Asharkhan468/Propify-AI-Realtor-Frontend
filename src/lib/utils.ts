@@ -7,11 +7,11 @@ export function cn(...inputs: ClassValue[]) {
 
 export function formatPrice(price: number): string {
   if (price >= 1000000) {
-    return `AED ${(price / 1000000).toFixed(1)}M`;
+    return `USD ${(price / 1000000).toFixed(1)}M`;
   } else if (price >= 1000) {
-    return `AED ${(price / 1000).toFixed(0)}K`;
+    return `USD ${(price / 1000).toFixed(0)}K`;
   }
-  return `AED ${price.toLocaleString()}`;
+  return `USD ${price.toLocaleString()}`;
 }
 
 export function formatArea(area: number): string {

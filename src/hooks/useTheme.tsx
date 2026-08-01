@@ -30,18 +30,30 @@ function applyTheme(theme: Theme) {
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(() => {
-    if (typeof window === 'undefined') return 'light';
-    const storedTheme = window.localStorage.getItem(themeStorageKey);
-    return storedTheme === 'light' || storedTheme === 'dark' || storedTheme === 'system'
-      ? storedTheme
-      : 'light';
-  });
-  const [systemTheme, setSystemTheme] = useState<'light' | 'dark'>(() =>
-    typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches
-      ? 'dark'
-      : 'light'
-  );
+  const [theme, setTheme] = useState<Theme>('light');
+  const [systemTheme, setSystemTheme] = useState<'light' | 'dark'>('light');
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const storedTheme = window.localStorage.getItem(themeStorageKey);
+      if (
+        storedTheme === 'light' ||
+        storedTheme === 'dark' ||
+        storedTheme === 'system'
+      ) {
+        setTheme(storedTheme);
+      }
+
+      const media = window.matchMedia('(prefers-color-scheme: dark)');
+      const updateSystemTheme = () => setSystemTheme(media.matches ? 'dark' : 'light');
+      updateSystemTheme();
+      media.addEventListener('change', updateSystemTheme);
+
+      return () => {
+        media.removeEventListener('change', updateSystemTheme);
+      };
+    }
+  }, []);
 
   useEffect(() => {
     applyTheme(theme);
@@ -49,23 +61,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     try {
       window.localStorage.setItem(themeStorageKey, theme);
     } catch {
-      // Ignore localStorage write failures in private or restricted environments.
     }
   }, [theme]);
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-
-    const media = window.matchMedia('(prefers-color-scheme: dark)');
-    const updateSystemTheme = () => setSystemTheme(media.matches ? 'dark' : 'light');
-
-    updateSystemTheme();
-    media.addEventListener('change', updateSystemTheme);
-
-    return () => {
-      media.removeEventListener('change', updateSystemTheme);
-    };
-  }, []);
 
   const resolvedTheme = theme === 'system' ? systemTheme : theme;
 

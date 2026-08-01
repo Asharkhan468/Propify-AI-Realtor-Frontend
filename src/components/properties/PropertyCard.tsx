@@ -44,6 +44,8 @@ export function PropertyCard({
     handleSend(`Can you tell me more details about "${property.title}" located in ${property.location}? What are the pricing options and availability?`);
   };
 
+  console.log("rendering" , property.title)
+
   if (variant === 'compact' || variant === 'chat') {
     return (
       <motion.div
@@ -52,7 +54,8 @@ export function PropertyCard({
       >
         <div className="relative h-36 overflow-hidden">
           <Image
-            src={property.images[0]}
+            // src={property.images[0]}
+             src={property.images?.[0] || "/placeholder.jpg"}
             alt={property.title}
             fill
             className="object-cover group-hover:scale-105 transition-transform duration-500"
@@ -64,7 +67,7 @@ export function PropertyCard({
           </div>
         </div>
         <div className="p-3.5">
-          <h3 className="font-outfit font-bold text-sm line-clamp-1 mb-1">{property.title}</h3>
+          <h3 className="font-outfit font-bold text-sm line-clamp-1 mb-1">test</h3>
           <div className="flex items-center gap-1 text-muted-foreground text-xs mb-2">
             <MapPin className="w-3 h-3 text-[#D4AF37]" />
             <span className="truncate">{property.location}</span>
